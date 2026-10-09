@@ -1,0 +1,18 @@
+[project]
+name = "data-aggregator-cli"
+version = "0.1.0"
+description = "Command-line interface for Data Aggregator"
+requires-python = ">=3.14"
+dependencies = [
+    "data-aggregator",
+]
+
+[project.scripts]
+data-aggregator = "data_aggregator_cli:main"
+
+[tool.uv.sources]
+data-aggregator = { workspace = true }
+
+[build-system]
+requires = ["uv_build>=0.12.24,<0.13.0"]
+build-backend = "uv_build"

@@ -1,0 +1,19 @@
+[project]
+name = "data-aggregator"
+version = "0.1.0"
+description = "Core runtime for the Data Aggregator"
+readme = "README.md"
+authors = [
+    { name = "WildWolfWuff", email = "mhummel@wildwolfwuff.de" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "data-aggregator-core",
+]
+
+[tool.uv.sources]
+data-aggregator-core = { workspace = true }
+
+[build-system]
+requires = ["uv_build>=0.12.24,<0.13.0"]
+build-backend = "uv_build"

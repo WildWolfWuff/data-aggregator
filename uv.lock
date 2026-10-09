@@ -1,0 +1,97 @@
+version = 1
+revision = 5
+requires-python = ">=3.14"
+
+[manifest]
+members = [
+    "aggregator",
+    "data-aggregator",
+    "data-aggregator-cli",
+    "data-aggregator-core",
+    "data-aggregator-provider-core",
+    "data-aggregator-provider-file",
+    "data-aggregator-provider-http",
+    "data-aggregator-provider-sql",
+    "data-aggregator-server",
+]
+
+[[package]]
+name = "aggregator"
+version = "0.1.0"
+source = { virtual = "." }
+
+[[package]]
+name = "data-aggregator"
+version = "0.1.0"
+source = { editable = "packages/data-aggregator" }
+dependencies = [
+    { name = "data-aggregator-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "data-aggregator-core", editable = "packages/data-aggregator-core" }]
+
+[[package]]
+name = "data-aggregator-cli"
+version = "0.1.0"
+source = { editable = "packages/data-aggregator-cli" }
+dependencies = [
+    { name = "data-aggregator" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "data-aggregator", editable = "packages/data-aggregator" }]
+
+[[package]]
+name = "data-aggregator-core"
+version = "0.1.0"
+source = { editable = "packages/data-aggregator-core" }
+
+[[package]]
+name = "data-aggregator-provider-core"
+version = "0.1.0"
+source = { editable = "packages/data-aggregator-provider-core" }
+dependencies = [
+    { name = "data-aggregator-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "data-aggregator-core", editable = "packages/data-aggregator-core" }]
+
+[[package]]
+name = "data-aggregator-provider-file"
+version = "0.1.0"
+source = { editable = "packages/data-aggregator-provider-file" }
+dependencies = [
+    { name = "data-aggregator-provider-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "data-aggregator-provider-core", editable = "packages/data-aggregator-provider-core" }]
+
+[[package]]
+name = "data-aggregator-provider-http"
+version = "0.1.0"
+source = { editable = "packages/data-aggregator-provider-http" }
+dependencies = [
+    { name = "data-aggregator-provider-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "data-aggregator-provider-core", editable = "packages/data-aggregator-provider-core" }]
+
+[[package]]
+name = "data-aggregator-provider-sql"
+version = "0.1.0"
+source = { editable = "packages/data-aggregator-provider-sql" }
+dependencies = [
+    { name = "data-aggregator-provider-core" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "data-aggregator-provider-core", editable = "packages/data-aggregator-provider-core" }]
+
+[[package]]
+name = "data-aggregator-server"
+version = "0.1.0"
+source = { editable = "packages/data-aggregator-server" }
