@@ -64,6 +64,8 @@ api:
 The repository is a `uv` workspace. Each package in `packages/` has its own
 `pyproject.toml` and can be built independently.
 
+source files:
+
 - `packages/data-aggregator/`: core runtime
 - `packages/data-aggregator-cli/`: CLI entry point
 - `packages/data-aggregator-core/`: shared code for other packages
@@ -72,6 +74,11 @@ The repository is a `uv` workspace. Each package in `packages/` has its own
 - `packages/data-aggregator-provider-http/`: HTTP data provider
 - `packages/data-aggregator-provider-file/`: local file data provider
 
+additional files:
+- `.github/workflows/`: CI/CD pipelines (TODO: add CI/CD pipelines)
+- `docs/`: documentation (TODO: add documentation)
+- `.devcontainer/`: development container configuration (TODO: add dev container support)
+
 ## Development
 
 Install all workspace packages into the development environment and run the CLI:
@@ -79,4 +86,15 @@ Install all workspace packages into the development environment and run the CLI:
 ```sh
 uv sync --all-packages
 uv run --package data-aggregator-cli data-aggregator
+```
+## Development
+
+Tooling (ruff, ty, pytest) is configured once in the root `pyproject.toml` and applies to all packages in `packages/`.
+
+```shell
+uv sync                    # installs workspace packages and dev tools
+uv run ruff check .        # lint
+uv run ruff format .       # format
+uv run ty check            # type check
+uv run pytest              # unit tests (packages/*/tests)
 ```

@@ -10,3 +10,55 @@ requires-python = ">=3.14"
 
 [tool.uv.workspace]
 members = ["packages/*"]
+
+[dependency-groups]
+dev = [
+    "data-aggregator",
+    "data-aggregator-cli",
+    "data-aggregator-core",
+    "data-aggregator-provider-core",
+    "data-aggregator-provider-file",
+    "data-aggregator-provider-grpc",
+    "data-aggregator-provider-http",
+    "data-aggregator-provider-sql",
+    "data-aggregator-server",
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.17.0",
+    "ty>=0.0.86",
+]
+
+[tool.uv]
+default-groups = ["dev"]
+
+[tool.uv.sources]
+data-aggregator = { workspace = true }
+data-aggregator-cli = { workspace = true }
+data-aggregator-core = { workspace = true }
+data-aggregator-provider-core = { workspace = true }
+data-aggregator-provider-file = { workspace = true }
+data-aggregator-provider-grpc = { workspace = true }
+data-aggregator-provider-http = { workspace = true }
+data-aggregator-provider-sql = { workspace = true }
+data-aggregator-server = { workspace = true }
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+src = ["packages/*/src", "packages/*/tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**" = ["S101"]
+
+[tool.ty.environment]
+python-version = "3.14"
+
+[tool.ty.terminal]
+error-on-warning = true
+
+[tool.pytest.ini_options]
+testpaths = ["packages"]
+addopts = "-ra --strict-markers --strict-config --import-mode=importlib"
