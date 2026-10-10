@@ -1,0 +1,11 @@
+services:
+  dev-container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    tty: true
+    volumes:
+      - ..:/workspace
+      - ../.git/:/workspace/.git
+    # Rootless podman: map the host UID/GID 1:1 into the container.
+    userns_mode: keep-id

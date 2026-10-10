@@ -1,0 +1,37 @@
+{
+    "name": "data-aggregator",
+    "dockerComposeFile": [
+        "docker-compose.yml"
+    ],
+    "service": "dev-container",
+    "workspaceFolder": "/workspace",
+    "remoteUser": "vscode",
+    "updateRemoteUserUID": true,
+    // use the compose file for the container, use /workspace as ws folder
+    "postAttachCommand": "uv sync --all-packages --no-progress",
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils": {
+            "installOhMyZshConfig": true,
+            "installOhMyZsh": true,
+            "configureZshAsDefaultShell": true,
+            "installZsh": true,
+            "upgradePackages": true
+        }
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "charliermarsh.ruff",
+                "astral-sh.ty",
+                "redhat.vscode-yaml",
+                "yzhang.markdown-all-in-one",
+                "cweijan.vscode-database-client2",
+                "qwtel.sqlite-viewer",
+                "rpdswtk.vsmqtt",
+                "oderwat.indent-rainbow",
+                "ReprEng.csv",
+                "EditorConfig.EditorConfig"
+            ]
+        }
+    }
+}
