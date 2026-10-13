@@ -1,0 +1,16 @@
+{
+  "configurations": [
+    {
+      "name": "Data Aggregator CLI",
+      "type": "debugpy",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "program": "packages/data-aggregator-cli/src/data_aggregator_cli/__main__.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--name",
+        "test.aggregator"
+      ]
+    }
+  ]
+}

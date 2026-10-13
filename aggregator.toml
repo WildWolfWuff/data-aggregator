@@ -1,0 +1,3 @@
+[aggregator]
+name = "toml.my.test.aggregator"
+description = "This is a test aggregator for demonstration purposes."

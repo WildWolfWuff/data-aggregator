@@ -3,16 +3,21 @@ name = "data-aggregator-cli"
 version = "0.1.0"
 description = "Command-line interface for Data Aggregator"
 requires-python = ">=3.14"
+authors = [
+    { name = "WildWolfWuff", email = "mhummel@wildwolfwuff.de" }
+]
 dependencies = [
     "data-aggregator",
 ]
-
 [project.scripts]
-data-aggregator = "data_aggregator_cli:main"
+data-aggregator-cli = "data_aggregator_cli:main"
 
 [tool.uv.sources]
 data-aggregator = { workspace = true }
 
+[tool.ruff]
+extend = "../../pyproject.toml"
+
 [build-system]
-requires = ["uv_build>=0.12.24,<0.13.0"]
+requires = ["uv_build>=0.13.0,<0.14"]
 build-backend = "uv_build"

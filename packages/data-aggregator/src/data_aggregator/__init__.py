@@ -1,6 +1,3 @@
-def main():
-    print("Startup of data aggregator")
+from data_aggregator.app import Aggregator as AggregatorApp
 
-
-if __name__ == "__main__":
-    main()
+__all__ = ["AggregatorApp"]

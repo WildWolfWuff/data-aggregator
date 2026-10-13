@@ -8,12 +8,25 @@ authors = [
 ]
 requires-python = ">=3.14"
 dependencies = [
+    "asyncio>=4.0.0",
     "data-aggregator-core",
+    "pandas>=3.0.6",
 ]
 
 [tool.uv.sources]
 data-aggregator-core = { workspace = true }
+data-aggregator-provider-core = { workspace = true }
+
+[tool.ruff]
+extend = "../../pyproject.toml"
+
+[tool.uv]
+package = true
+
+[tool.uv.build-backend]
+module-name = "data_aggregator"
+namespace = true
 
 [build-system]
-requires = ["uv_build>=0.12.24,<0.13.0"]
+requires = ["uv_build>=0.13.0,<0.14"]
 build-backend = "uv_build"

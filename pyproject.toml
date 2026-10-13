@@ -8,10 +8,9 @@ authors = [
 ]
 requires-python = ">=3.14"
 
-[tool.uv.workspace]
-members = ["packages/*"]
 
 [dependency-groups]
+
 dev = [
     "data-aggregator",
     "data-aggregator-cli",
@@ -31,6 +30,9 @@ dev = [
 [tool.uv]
 default-groups = ["dev"]
 
+[tool.uv.workspace]
+members = ["packages/*"]
+
 [tool.uv.sources]
 data-aggregator = { workspace = true }
 data-aggregator-cli = { workspace = true }
@@ -45,13 +47,17 @@ data-aggregator-server = { workspace = true }
 [tool.ruff]
 line-length = 100
 target-version = "py314"
+indent-width = 2
+
+
 src = ["packages/*/src", "packages/*/tests"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["E111", "E116"]
 
 [tool.ruff.lint.per-file-ignores]
-"**/tests/**" = ["S101"]
+"**/tests/**" = ["S101", "E111", "E116"]
 
 [tool.ty.environment]
 python-version = "3.14"
@@ -60,5 +66,5 @@ python-version = "3.14"
 error-on-warning = true
 
 [tool.pytest.ini_options]
-testpaths = ["packages"]
+testpaths = ["src"]
 addopts = "-ra --strict-markers --strict-config --import-mode=importlib"

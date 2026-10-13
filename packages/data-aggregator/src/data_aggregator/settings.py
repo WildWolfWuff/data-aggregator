@@ -1,0 +1,6 @@
+from data_aggregator_core import AggregatorSettingsBase
+from data_aggregator_provider_core.settings import AggregatorDataSettings
+
+
+class AggregatorSettings(AggregatorDataSettings, AggregatorSettingsBase):
+  pass
