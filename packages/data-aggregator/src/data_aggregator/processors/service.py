@@ -8,5 +8,7 @@ async def process_data_async(
 ) -> pd.DataFrame:
   logger = logging.getLogger(__name__)
   logger.info("Starting to process data asynchronously")
-  # TODO: Implement the processors
+
+  # TODO: get the configured processor and run it with the provided data
+
   return pd.DataFrame()

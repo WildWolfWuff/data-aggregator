@@ -9,7 +9,8 @@ dependencies = [
 
 [tool.uv.sources]
 data-aggregator-core = { workspace = true }
-
+[tool.uv.build-backend]
+namespace = true
 [build-system]
 requires = ["uv_build>=0.13.0,<0.14"]
 build-backend = "uv_build"

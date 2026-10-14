@@ -48,6 +48,9 @@
         "ty.completions.autoImport": true,
         "ty.importStrategy": "fromEnvironment",
         "python.languageServer": "Default",
+        "python.analysis.ignore": [
+          "*"
+        ],
         "[python]": {
           "editor.defaultFormatter": "charliermarsh.ruff",
           "editor.formatOnSave": true,

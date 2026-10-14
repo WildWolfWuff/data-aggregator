@@ -1,21 +1,26 @@
+from typing import Annotated
+
 from pydantic import Field
 
 from data_aggregator_core import (
   AggregatorSettingsBase,
 )
-from data_aggregator_provider_core.collector_configuration_base import CollectorConfigurationBase
-from data_aggregator_provider_core.exporter_configuration_base import ExporterConfigurationBase
+
+from .collector_configuration import CollectorConfigurationBase
+from .exporter_configuration import ExporterConfigurationBase
 
 
 class AggregatorDataSettings(AggregatorSettingsBase):
-  providers: dict[str, dict[str, object]] = Field(
-    default={}, description="Configuration for data providers"
-  )
+  providers: Annotated[
+    dict[str, dict[str, object]], Field(description="Configuration for data providers")
+  ]
 
-  collectors: dict[str, object | CollectorConfigurationBase] = Field(
-    default={}, description="Configuration for data collectors"
-  )
+  collectors: Annotated[
+    dict[str, object | CollectorConfigurationBase],
+    Field(description="Configuration for data collectors"),
+  ]
 
-  exporters: dict[str, object | ExporterConfigurationBase] = Field(
-    default={}, description="Configuration for data exporters"
-  )
+  exporters: Annotated[
+    dict[str, object | ExporterConfigurationBase],
+    Field(description="Configuration for data exporters"),
+  ]
