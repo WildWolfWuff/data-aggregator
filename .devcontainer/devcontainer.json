@@ -1,37 +1,84 @@
 {
-    "name": "data-aggregator",
-    "dockerComposeFile": [
-        "docker-compose.yml"
-    ],
-    "service": "dev-container",
-    "workspaceFolder": "/workspace",
-    "remoteUser": "vscode",
-    "updateRemoteUserUID": true,
-    // use the compose file for the container, use /workspace as ws folder
-    "postAttachCommand": "uv sync --all-packages --no-progress",
-    "features": {
-        "ghcr.io/devcontainers/features/common-utils": {
-            "installOhMyZshConfig": true,
-            "installOhMyZsh": true,
-            "configureZshAsDefaultShell": true,
-            "installZsh": true,
-            "upgradePackages": true
-        }
-    },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "charliermarsh.ruff",
-                "astral-sh.ty",
-                "redhat.vscode-yaml",
-                "yzhang.markdown-all-in-one",
-                "cweijan.vscode-database-client2",
-                "qwtel.sqlite-viewer",
-                "rpdswtk.vsmqtt",
-                "oderwat.indent-rainbow",
-                "ReprEng.csv",
-                "EditorConfig.EditorConfig"
-            ]
-        }
+  "name": "data-aggregator",
+  "dockerComposeFile": [
+    "docker-compose.yml"
+  ],
+  "service": "dev-container",
+  "workspaceFolder": "/workspace",
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": true,
+  // use the compose file for the container, use /workspace as ws folder
+  "postAttachCommand": "uv sync --all-packages --no-progress",
+  "containerEnv": {
+    "UV_LINK_MODE": "copy"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils": {
+      "installOhMyZshConfig": true,
+      "installOhMyZsh": true,
+      "configureZshAsDefaultShell": true,
+      "installZsh": true,
+      "upgradePackages": true
     }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "charliermarsh.ruff",
+        "astral-sh.ty",
+        "redhat.vscode-yaml",
+        "yzhang.markdown-all-in-one",
+        "cweijan.vscode-database-client2",
+        "qwtel.sqlite-viewer",
+        "rpdswtk.vsmqtt",
+        "oderwat.indent-rainbow",
+        "ReprEng.csv",
+        "EditorConfig.EditorConfig"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "ruff.enable": true,
+        "ruff.organizeImports": true,
+        "ruff.lintOnSave": true,
+        "ruff.lint.preview": true,
+        "ruff.lint.enable": true,
+        "ruff.showSyntaxErrors": true,
+        "ruff.fixAll": true,
+        "ruff.configurationPreference": "editorFirst",
+        "ruff.importStrategy": "fromEnvironment",
+        "ruff.configuration": "/workspace/pyproject.toml",
+        "ty.showSyntaxErrors": true,
+        "ty.completions.autoImport": true,
+        "ty.importStrategy": "fromEnvironment",
+        "python.languageServer": "Default",
+        "python.analysis.ignore": [
+          "*"
+        ],
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "always",
+            "source.organizeImports.ruff": "always"
+          }
+        },
+        "[json]": {
+          "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        "[yaml]": {
+          "editor.defaultFormatter": "redhat.vscode-yaml"
+        },
+        "yaml.format.enable": true,
+        "yaml.completion": true,
+        "yaml.hover": true,
+        "files.eol": "\n",
+        "python.testing.pytestArgs": [
+          "./packages"
+        ],
+        "python.testing.unittestEnabled": false,
+        "python.testing.pytestEnabled": true,
+        "python.testing.pytestPath": "pytest"
+      }
+    }
+  }
 }

@@ -8,11 +8,17 @@ dependencies = [
 ]
 
 [project.scripts]
-data-aggregator = "data_aggregator_cli:main"
+data-aggregator = "data_aggregator.cli:main"
+
+[tool.ruff]
+extend = "../../pyproject.toml"
 
 [tool.uv.sources]
 data-aggregator = { workspace = true }
 
+[tool.uv.build-backend]
+module-name = "data_aggregator.cli"
+
 [build-system]
-requires = ["uv_build>=0.12.24,<0.13.0"]
+requires = ["uv_build>=0.13.1,<0.14"]
 build-backend = "uv_build"

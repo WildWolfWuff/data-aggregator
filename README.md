@@ -10,8 +10,8 @@ The data processing can be extended by plugins and the data loading and saving c
 The script looks like
 ```python
 def process(data: dict[str, pandas.DataFrame]) -> pandas.DataFrame:
-    # process the data and return the result
-    return data["source1"].merge(data["source2"], on="id")
+  # process the data and return the result
+  return data["source1"].merge(data["source2"], on="id")
 ```
 The script gets a dictionary with the loaded data from the sources and should return a single pandas DataFrame with the processed data.
 The keys in the data dictionary are the names of the sources that are defined in the configuration.
