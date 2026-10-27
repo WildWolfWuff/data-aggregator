@@ -16,6 +16,7 @@ dev = [
     "data-aggregator",
     "data-aggregator-cli",
     "data-aggregator-core",
+    "data-aggregator-provider-core",
     "click>=8.1",
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
@@ -31,6 +32,8 @@ default-groups = ["dev"]
 data-aggregator = { workspace = true }
 data-aggregator-cli = { workspace = true }
 data-aggregator-core = { workspace = true }
+data-aggregator-provider-core = { workspace = true }
+
 
 [tool.ruff]
 line-length = 120

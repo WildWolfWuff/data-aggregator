@@ -1,5 +1,48 @@
 {
   "$defs": {
+    "AggregatorCollectorConfiguration": {
+      "additionalProperties": {
+        "anyOf": [
+          {},
+          {
+            "$ref": "#/$defs/DataCollectorConfigBase"
+          }
+        ]
+      },
+      "propertyNames": {
+        "$ref": "#/$defs/CollectorName"
+      },
+      "type": "object"
+    },
+    "AggregatorExporterConfiguration": {
+      "additionalProperties": {
+        "anyOf": [
+          {},
+          {
+            "$ref": "#/$defs/DataExporterConfigBase"
+          }
+        ]
+      },
+      "propertyNames": {
+        "$ref": "#/$defs/ExporterName"
+      },
+      "type": "object"
+    },
+    "AggregatorProviderConfiguration": {
+      "additionalProperties": {
+        "additionalProperties": {
+          "$ref": "#/$defs/ProviderConfig"
+        },
+        "propertyNames": {
+          "$ref": "#/$defs/ProviderName"
+        },
+        "type": "object"
+      },
+      "propertyNames": {
+        "$ref": "#/$defs/ProviderType"
+      },
+      "type": "object"
+    },
     "BasicAuthConfig": {
       "properties": {
         "type": {
@@ -25,6 +68,215 @@
       ],
       "title": "BasicAuthConfig",
       "type": "object"
+    },
+    "CollectorName": {
+      "type": "string"
+    },
+    "DataCollectorConfigBase": {
+      "description": "Base class for data collector configuration.",
+      "properties": {
+        "provider": {
+          "$ref": "#/$defs/DataProviderRef",
+          "description": "The reference to the data provider"
+        },
+        "source": {
+          "default": "",
+          "description": "The source for the data collector; defaults to the name of the source if empty",
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider"
+      ],
+      "title": "DataCollectorConfigBase",
+      "type": "object"
+    },
+    "DataExporterConfigBase": {
+      "description": "Base class for data exporter configuration.",
+      "properties": {
+        "provider": {
+          "$ref": "#/$defs/DataProviderRef",
+          "description": "The reference to the data provider"
+        },
+        "target": {
+          "default": "",
+          "description": "The target for the data exporter; defaults to the name of the target if empty",
+          "title": "Target",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider"
+      ],
+      "title": "DataExporterConfigBase",
+      "type": "object"
+    },
+    "DataProviderConfigBase": {
+      "description": "Base class for data provider configuration.",
+      "properties": {},
+      "title": "DataProviderConfigBase",
+      "type": "object"
+    },
+    "DataProviderRef": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/$defs/DataProviderRefConfig"
+        }
+      ]
+    },
+    "DataProviderRefConfig": {
+      "description": "Configuration for a data provider reference.\nThis can be used to reference a data provider by its type and name.",
+      "properties": {
+        "type": {
+          "$ref": "#/$defs/ProviderType",
+          "description": "The type of the data provider"
+        },
+        "name": {
+          "$ref": "#/$defs/ProviderName",
+          "description": "The name of the data provider"
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ],
+      "title": "DataProviderRefConfig",
+      "type": "object"
+    },
+    "ExporterName": {
+      "type": "string"
+    },
+    "PluginSpec": {
+      "description": "A plugin package to install: a requirement, local wheel path or URL, optionally hash pinned.",
+      "properties": {
+        "name": {
+          "description": "Requirement (name==1.0), wheel path or URL",
+          "title": "Name",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Expected sha256 of the artifact",
+          "title": "Sha256"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "PluginSpec",
+      "type": "object"
+    },
+    "PluginsConfig": {
+      "properties": {
+        "packages": {
+          "description": "Plugins installed at startup",
+          "items": {
+            "$ref": "#/$defs/PluginSpec"
+          },
+          "title": "Packages",
+          "type": "array"
+        },
+        "install_dir": {
+          "default": "/plugins/site-packages",
+          "description": "Target directory for installed plugins",
+          "format": "path",
+          "title": "Install Dir",
+          "type": "string"
+        },
+        "plugin_dir": {
+          "anyOf": [
+            {
+              "format": "path",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Additional directory with ready-to-use plugin packages",
+          "title": "Plugin Dir"
+        },
+        "index_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Alternative package index",
+          "title": "Index Url"
+        },
+        "no_index": {
+          "default": false,
+          "description": "Do not use an index (offline installs)",
+          "title": "No Index",
+          "type": "boolean"
+        },
+        "find_links": {
+          "description": "Locations to search for wheels",
+          "items": {
+            "type": "string"
+          },
+          "title": "Find Links",
+          "type": "array"
+        },
+        "import_paths": {
+          "description": "Explicit 'module:Class' provider classes",
+          "items": {
+            "type": "string"
+          },
+          "title": "Import Paths",
+          "type": "array"
+        },
+        "allowlist": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "If set, only these entry point names are loaded",
+          "title": "Allowlist"
+        }
+      },
+      "title": "PluginsConfig",
+      "type": "object"
+    },
+    "ProviderConfig": {
+      "anyOf": [
+        {},
+        {
+          "$ref": "#/$defs/DataProviderConfigBase"
+        }
+      ]
+    },
+    "ProviderName": {
+      "type": "string"
+    },
+    "ProviderType": {
+      "type": "string"
     },
     "ScriptAuthConfig": {
       "discriminator": {
@@ -174,6 +426,22 @@
   "additionalProperties": false,
   "description": "TODO: add description for json schema",
   "properties": {
+    "providers": {
+      "$ref": "#/$defs/AggregatorProviderConfiguration",
+      "description": "The providers configuration"
+    },
+    "collectors": {
+      "$ref": "#/$defs/AggregatorCollectorConfiguration",
+      "description": "The collectors configuration"
+    },
+    "exporters": {
+      "$ref": "#/$defs/AggregatorExporterConfiguration",
+      "description": "The exporters configuration"
+    },
+    "plugins": {
+      "$ref": "#/$defs/PluginsConfig",
+      "description": "The plugins configuration"
+    },
     "name": {
       "description": "The name of the aggregator",
       "title": "Name",
@@ -202,6 +470,9 @@
     }
   },
   "required": [
+    "providers",
+    "collectors",
+    "exporters",
     "name",
     "processing"
   ],

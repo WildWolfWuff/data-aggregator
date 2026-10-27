@@ -26,7 +26,9 @@ class ScriptDataProcessorConfig(BaseModel):
   source: Annotated[HttpUrl | FilePath | None, Field(default=None, description="Source of the script")]
   content: Annotated[str | None, Field(default=None, description="Content of the script")]
   auth: Annotated[ScriptAuthConfig | None, Field(default=None, description="Authentication for a remote source")]
-  allowed_modules: Annotated[frozenset[str], Field(default=frozenset(), description="Top-level modules the script may import")]
+  allowed_modules: Annotated[
+    frozenset[str], Field(default=frozenset(), description="Top-level modules the script may import")
+  ]
   allow_http: Annotated[bool, Field(default=False, description="Permit plain http remote sources")]
   timeout: Annotated[float, Field(default=10.0, gt=0, description="Remote request timeout in seconds")]
   max_size_bytes: Annotated[int, Field(default=1_000_000, gt=0, description="Maximum script size in bytes")]

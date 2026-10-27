@@ -59,6 +59,12 @@ api:
   - Receive messages from a other completed aggregator run that triggers the current aggregator run for chain aggregators together (server mode). 
 
 
+## Plugins
+
+Data providers are plugins that can collect and/or export data. See
+[packages/data-aggregator-provider-core/README.md](packages/data-aggregator-provider-core/README.md) for how to
+implement, install and configure them.
+
 ## Project structure
 
 The repository is a `uv` workspace. Each package in `packages/` has its own

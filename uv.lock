@@ -13,6 +13,7 @@ members = [
     "data-aggregator",
     "data-aggregator-cli",
     "data-aggregator-core",
+    "data-aggregator-provider-core",
 ]
 
 [[package]]
@@ -26,6 +27,7 @@ dev = [
     { name = "data-aggregator" },
     { name = "data-aggregator-cli" },
     { name = "data-aggregator-core" },
+    { name = "data-aggregator-provider-core" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "pytest-cov" },
@@ -41,6 +43,7 @@ dev = [
     { name = "data-aggregator", editable = "packages/data-aggregator" },
     { name = "data-aggregator-cli", editable = "packages/data-aggregator-cli" },
     { name = "data-aggregator-core", editable = "packages/data-aggregator-core" },
+    { name = "data-aggregator-provider-core", editable = "packages/data-aggregator-provider-core" },
     { name = "pytest", specifier = ">=9.1.1" },
     { name = "pytest-asyncio", specifier = ">=1.4.1" },
     { name = "pytest-cov", specifier = ">=7.1.0" },
@@ -171,11 +174,13 @@ version = "0.1.0"
 source = { editable = "packages/data-aggregator" }
 dependencies = [
     { name = "data-aggregator-core" },
-
+    { name = "data-aggregator-provider-core" },
 ]
 
 [package.metadata]
-requires-dist = [{ name = "data-aggregator-core", editable = "packages/data-aggregator-core" }]
+requires-dist = [
+    { name = "data-aggregator-core", editable = "packages/data-aggregator-core" },
+    { name = "data-aggregator-provider-core", editable = "packages/data-aggregator-provider-core" },
 ]
 
 [[package]]
