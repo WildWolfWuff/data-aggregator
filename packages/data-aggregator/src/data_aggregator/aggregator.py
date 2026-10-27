@@ -1,11 +1,15 @@
-from data_aggregator.core import AggregatorSettingsBase
+from data_aggregator.processing.service import execute_data_processing
+from data_aggregator.settings import AggregatorSettings
 
 
-def execute_aggregator():
+async def execute_aggregator():
   try:
-    settings = AggregatorSettingsBase()
-    print("Initialize Aggregator:", settings.name)
+    settings = AggregatorSettings()
 
-    print("Aggregator executed")
+    data = {}  # TODO: call the collectors based on the configurations
+    print("Initialize Aggregator:", settings.name)  # TODO: convert to logging
+    result = await execute_data_processing(data, settings)
+    # TODO: call the exporters based on the configurations
+    print("Aggregator executed", result)
   except ValueError as e:
     print("Error initializing Aggregator:", e)

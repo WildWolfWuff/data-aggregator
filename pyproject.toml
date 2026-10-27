@@ -16,8 +16,10 @@ dev = [
     "data-aggregator",
     "data-aggregator-cli",
     "data-aggregator-core",
+    "click>=8.1",
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
+    "pytest-asyncio>=1.4.1",
     "ruff>=0.17.0",
     "ty>=0.0.86",
 ]
@@ -49,5 +51,6 @@ python-version = "3.14"
 error-on-warning = true
 
 [tool.pytest.ini_options]
-testpaths = ["packages"]
+testpaths = ["packages/**/tests"]
 addopts = "-ra --strict-markers --strict-config --import-mode=importlib"
+asyncio_default_fixture_loop_scope = "function"

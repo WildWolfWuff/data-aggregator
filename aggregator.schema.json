@@ -1,0 +1,210 @@
+{
+  "$defs": {
+    "BasicAuthConfig": {
+      "properties": {
+        "type": {
+          "const": "basic",
+          "default": "basic",
+          "title": "Type",
+          "type": "string"
+        },
+        "username": {
+          "title": "Username",
+          "type": "string"
+        },
+        "password": {
+          "format": "password",
+          "title": "Password",
+          "type": "string",
+          "writeOnly": true
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ],
+      "title": "BasicAuthConfig",
+      "type": "object"
+    },
+    "ScriptAuthConfig": {
+      "discriminator": {
+        "mapping": {
+          "basic": "#/$defs/BasicAuthConfig",
+          "token": "#/$defs/TokenAuthConfig"
+        },
+        "propertyName": "type"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/BasicAuthConfig"
+        },
+        {
+          "$ref": "#/$defs/TokenAuthConfig"
+        }
+      ]
+    },
+    "ScriptDataProcessorConfig": {
+      "properties": {
+        "type": {
+          "const": "script",
+          "default": "script",
+          "description": "Type of the data processor (script)",
+          "title": "Type",
+          "type": "string"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "maxLength": 2083,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "format": "file-path",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Source of the script",
+          "title": "Source"
+        },
+        "content": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Content of the script",
+          "title": "Content"
+        },
+        "auth": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ScriptAuthConfig"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Authentication for a remote source"
+        },
+        "allowed_modules": {
+          "default": [],
+          "description": "Top-level modules the script may import",
+          "items": {
+            "type": "string"
+          },
+          "title": "Allowed Modules",
+          "type": "array",
+          "uniqueItems": true
+        },
+        "allow_http": {
+          "default": false,
+          "description": "Permit plain http remote sources",
+          "title": "Allow Http",
+          "type": "boolean"
+        },
+        "timeout": {
+          "default": 10.0,
+          "description": "Remote request timeout in seconds",
+          "exclusiveMinimum": 0,
+          "title": "Timeout",
+          "type": "number"
+        },
+        "max_size_bytes": {
+          "default": 1000000,
+          "description": "Maximum script size in bytes",
+          "exclusiveMinimum": 0,
+          "title": "Max Size Bytes",
+          "type": "integer"
+        }
+      },
+      "title": "ScriptDataProcessorConfig",
+      "type": "object"
+    },
+    "TokenAuthConfig": {
+      "properties": {
+        "type": {
+          "const": "token",
+          "default": "token",
+          "title": "Type",
+          "type": "string"
+        },
+        "token": {
+          "format": "password",
+          "title": "Token",
+          "type": "string",
+          "writeOnly": true
+        },
+        "header": {
+          "default": "Authorization",
+          "title": "Header",
+          "type": "string"
+        },
+        "scheme": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "Bearer",
+          "description": "Prefix before the token; None sends the bare token",
+          "title": "Scheme"
+        }
+      },
+      "required": [
+        "token"
+      ],
+      "title": "TokenAuthConfig",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "TODO: add description for json schema",
+  "properties": {
+    "name": {
+      "description": "The name of the aggregator",
+      "title": "Name",
+      "type": "string"
+    },
+    "description": {
+      "default": "",
+      "description": "Description of the aggregator purpose",
+      "title": "Description",
+      "type": "string"
+    },
+    "processing": {
+      "description": "The processing configuration",
+      "discriminator": {
+        "mapping": {
+          "script": "#/$defs/ScriptDataProcessorConfig"
+        },
+        "propertyName": "type"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/ScriptDataProcessorConfig"
+        }
+      ],
+      "title": "Processing"
+    }
+  },
+  "required": [
+    "name",
+    "processing"
+  ],
+  "title": "AggregatorSettings",
+  "type": "object"
+}
