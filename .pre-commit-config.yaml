@@ -1,0 +1,23 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.3
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/astral-sh/ty-pre-commit
+    rev: v0.0.92
+    hooks:
+      - id: ty
+        args: [--fix]
+        pass_filenames: false
+
+  - repo: local
+    hooks:
+      - id: generate-settings-schema
+        name: Regenerate aggregator settings schema
+        entry: uv run tools/generate_settings_schema.py --output aggregator.schema.json
+        language: system
+        types: [python]
+        pass_filenames: false

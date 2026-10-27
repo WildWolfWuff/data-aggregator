@@ -5,7 +5,7 @@
       "type": "debugpy",
       "request": "launch",
       "cwd": "${workspaceFolder}",
-      "program": "packages/data-aggregator-cli/src/data_aggregator/cli/__main__.py",
+      "program": "packages/data-aggregator-cli/src/data_aggregator/cli/main.py",
       "console": "integratedTerminal",
       "args": [
         "--name",

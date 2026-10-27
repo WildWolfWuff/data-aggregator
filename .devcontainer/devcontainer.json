@@ -8,7 +8,11 @@
   "remoteUser": "vscode",
   "updateRemoteUserUID": true,
   // use the compose file for the container, use /workspace as ws folder
-  "postAttachCommand": "uv sync --all-packages --no-progress",
+  "postStartCommand": "uv sync --all-packages --no-progress",
+  "postAttachCommand": {
+    "setup-pre-commit": "uv run pre-commit install",
+    "rebuild-schema-json": "uv run python tools/generate_settings_schema.py --output aggregator.schema.json"
+  },
   "containerEnv": {
     "UV_LINK_MODE": "copy"
   },

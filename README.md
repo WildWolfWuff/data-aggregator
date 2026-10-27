@@ -95,12 +95,14 @@ uv run --package data-aggregator-cli data-aggregator
 ```
 ## Development
 
-Tooling (ruff, ty, pytest) is configured once in the root `pyproject.toml` and applies to all packages in `packages/`.
+Tooling (Ruff, ty, pytest, pre-commit) is configured once in the root `pyproject.toml` and applies to all packages in `packages/`.
 
 ```shell
 uv sync                    # installs workspace packages and dev tools
+uv run pre-commit install  # install the git hooks
 uv run ruff check .        # lint
 uv run ruff format .       # format
 uv run ty check            # type check
 uv run pytest              # unit tests (packages/*/tests)
+uv run pre-commit run --all-files  # run hooks on all files
 ```

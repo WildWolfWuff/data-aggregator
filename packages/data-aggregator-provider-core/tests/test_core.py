@@ -70,7 +70,7 @@ def test_api_version_mismatch() -> None:
 def test_bad_config_model() -> None:
   class Bad(CollectOnly):
     provider_type = "bad"
-    config_model = dict  # type: ignore[assignment]
+    config_model = dict  # ty: ignore[invalid-assignment]
 
   assert any("config_model" in e for e in validate_provider_class(Bad))
 
